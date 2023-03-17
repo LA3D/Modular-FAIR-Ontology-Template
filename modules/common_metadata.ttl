@@ -1,0 +1,31 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix your-prefix: <https://w3id.org/your-ontology-uri/> .
+@prefix your-modules: <https://w3id.org/your-ontology-uri/modules/> .
+@prefix your-patterns: <https://w3id.org/your-ontology-uri/patterns/> .
+@prefix your-shacl: <https://w3id.org/your-ontology-uri/shacl/> .
+
+
+# Ontology metadata - this module contains common metadata about your ontology, including its name, description, version info, creators, and license.
+
+<https://w3id.org/your-ontology-uri> rdf:type owl:Ontology ;
+    dct:title "Your Ontology Name" ;
+    dct:description "A short description of your ontology." ;
+    dct:creator [
+        foaf:name "Your Name";
+        foaf:mbox "mailto:you@example.com"
+    ] ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    vann:preferredNamespacePrefix "your-prefix" ;
+    vann:preferredNamespaceUri "https://w3id.org/your-ontology-uri#" ;
+    owl:versionInfo "1.0" ;
+    owl:imports <https://w3id.org/your-ontology-uri/modules/common_metadata> ;
+    void:vocabulary "https://w3id.org/your-ontology-uri" ;
+    dct:publisher <https://w3id.org/your-ontology-uri/publisher> ;
+    dct:issued "2023-03-17"^^xsd:date ;
+    dct:modified "2023-03-17"^^xsd:date ;
+    skos:definition "A detailed description of your ontology, including its purpose, scope, and intended audience." .

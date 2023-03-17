@@ -1,0 +1,45 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix your-prefix: <https://w3id.org/your-ontology/> .
+@prefix oplax: <http://www.ontologydesignpatterns.org/oplax/> .
+
+
+# Generic pattern - this template serves as a starting point for creating your own ontology design patterns.
+# Include a brief description of the pattern here.
+
+# Example pattern: Event Temporal Entity, Spatial Entity, Role pattern
+# This pattern allows you to represent events that occur in time and space, and the roles that entities play in these events.
+#
+# Classes:
+# - Event
+# - TemporalEntity
+# - SpatialEntity
+# - Role
+#
+# Properties:
+# - hasTemporalEntity (domain: Event, range: TemporalEntity)
+# - hasSpatialEntity (domain: Event, range: SpatialEntity)
+# - hasRole (domain: Event, range: Role)
+# - playedBy (domain: Role, range: owl:Thing)
+
+# Add your pattern classes, properties, and other ontology elements, following the example above.
+# Make sure to add oplax:definedInPattern annotation to the classes and properties to indicate their origin in this pattern.
+
+# Define the pattern's conceptual level annotation using OPLaX:
+
+your-patterns:ExamplePattern rdf:type oplax:Pattern ;
+    rdfs:label "Example Pattern" ;
+    rdfs:comment "A brief description of the Example Pattern." ;
+    oplax:hasIntent "The intent or purpose of the Example Pattern." ;
+    oplax:hasContext "The context or situations where the Example Pattern can be applied." ;
+    oplax:hasFormalityLevel oplax:Formal ;
+    oplax:hasGranularity oplax:Fine ;
+    oplax:hasPurpose "The purpose of the Example Pattern, e.g., modeling a specific domain concept." .
+
+# Add instance-level OPLaX annotations for the pattern elements (e.g., classes and properties) by including oplax:implementsPattern in their definitions.
+
+# Usage example: To use this pattern in an ontology module, import this pattern file and create individuals or other ontology elements that follow the pattern.
+
+# Add more patterns as separate files in the patterns directory, following the same structure and incorporating OPLaX annotations.

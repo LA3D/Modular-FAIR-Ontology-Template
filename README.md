@@ -50,6 +50,7 @@ To effectively use ChatGPT as an ontology modeling assistant:
 5. **Iteratively refine your ontology**: Use ChatGPT to iteratively refine your ontology, addressing potential issues, inconsistencies, or gaps in the model. This will help you create a more robust and well-structured ontology that adheres to best practices.
 
 By following these guidelines and using ChatGPT as a collaborative ontology modeling assistant, you can accelerate the development process and create ontologies that are more findable, accessible, interoperable, and reusable.
+W
 
 ## ChatGPT Prompt Priming
 
@@ -71,41 +72,41 @@ To prime ChatGPT for ontology modeling assistance, use the following prompts:
 
 ## Helpful References
 
-1. [FAIR Principles](https://www.go-fair.org/fair-principles/)
+1.  [FAIR Principles](https://www.go-fair.org/fair-principles/)
 
-   - A detailed explanation of the FAIR principles for making data findable, accessible, interoperable, and reusable.
+    - A detailed explanation of the FAIR principles for making data findable, accessible, interoperable, and reusable.
 
-2. [OWL 2 Web Ontology Language Primer](https://www.w3.org/TR/owl2-primer/)
+2.  [OWL 2 Web Ontology Language Primer](https://www.w3.org/TR/owl2-primer/)
 
-   - A gentle introduction to the OWL 2 Web Ontology Language for those who are new to ontology modeling.
+    - A gentle introduction to the OWL 2 Web Ontology Language for those who are new to ontology modeling.
 
-3. [Turtle - Terse RDF Triple Language](https://www.w3.org/TR/turtle/)
+3.  [Turtle - Terse RDF Triple Language](https://www.w3.org/TR/turtle/)
 
-   - The official W3C recommendation on the Turtle syntax for expressing RDF graphs in a concise and readable way.
+    - The official W3C recommendation on the Turtle syntax for expressing RDF graphs in a concise and readable way.
 
-4. [SHACL - Shapes Constraint Language](https://www.w3.org/TR/shacl/)
+4.  [SHACL - Shapes Constraint Language](https://www.w3.org/TR/shacl/)
 
-   - The W3C recommendation on SHACL, a language for validating RDF graphs against a set of conditions.
+    - The W3C recommendation on SHACL, a language for validating RDF graphs against a set of conditions.
 
-5. [JSON-LD - JSON for Linking Data](https://www.w3.org/TR/json-ld/)
+5.  [JSON-LD - JSON for Linking Data](https://www.w3.org/TR/json-ld/)
 
-   - The W3C recommendation on JSON-LD, a lightweight Linked Data format for expressing RDF data in JSON.
+    - The W3C recommendation on JSON-LD, a lightweight Linked Data format for expressing RDF data in JSON.
 
-6. [PySHACL](https://github.com/RDFLib/pySHACL)
+6.  [PySHACL](https://github.com/RDFLib/pySHACL)
 
-   - The official GitHub repository of the PySHACL library, a Python validator for SHACL.
+    - The official GitHub repository of the PySHACL library, a Python validator for SHACL.
 
-7. [Widoco - A tool to generate ontology documentation](https://github.com/dgarijo/Widoco)
+7.  [Widoco - A tool to generate ontology documentation](https://github.com/dgarijo/Widoco)
 
-   - The official GitHub repository of Widoco, a tool to generate human-readable documentation for ontologies.
+    - The official GitHub repository of Widoco, a tool to generate human-readable documentation for ontologies.
 
-8. [PyLODE - A Python tool for generating Linked Data documentation](https://github.com/rdflib/pyLODE)
+8.  [PyLODE - A Python tool for generating Linked Data documentation](https://github.com/rdflib/pyLODE)
 
-   - The official GitHub repository of PyLODE, a Python library to generate human-readable Linked Data documentation.
+    - The official GitHub repository of PyLODE, a Python library to generate human-readable Linked Data documentation.
 
-9. [WebVOWL - Web-based Visualization of Ontologies](http://vowl.visualdataweb.org/webvowl.html)
+9.  [WebVOWL - Web-based Visualization of Ontologies](http://vowl.visualdataweb.org/webvowl.html)
 
-   - A web-based tool for visualizing ontologies in an interactive, graph-based format.
+    - A web-based tool for visualizing ontologies in an interactive, graph-based format.
 
 10. [SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/)
 
@@ -128,4 +129,10 @@ To prime ChatGPT for ontology modeling assistance, use the following prompts:
     - A research paper discussing the challenges and techniques for modular ontology modeling.
 
 15. [Good Ontology Design](https://www.w3.org/2001/sw/BestPractices/OEP/)
+
     - W3C's Semantic Web Best Practices and Deployment Working Group page on ontology engineering practices.
+
+16. [OPLaX: annotating ontology design patterns at
+    conceptual and instance level](https://ceur-ws.org/Vol-3011/paper1.pdf)
+
+        - Annotations to create and implement FAIR ontology design patterns.

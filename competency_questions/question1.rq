@@ -1,0 +1,16 @@
+# Competency Question 1
+#
+# Description: A brief description of the competency question.
+# Example: "Find all instances of ExampleClass with their associated properties."
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX your-prefix: <https://w3id.org/your-ontology/>
+
+SELECT ?instance ?property ?value
+WHERE {
+    ?instance rdf:type your-prefix:ExampleClass .
+    ?instance ?property ?value .
+}

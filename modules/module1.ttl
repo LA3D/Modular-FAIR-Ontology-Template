@@ -1,0 +1,29 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix your-prefix: <https://w3id.org/your-ontology/> .
+@prefix oplax: <http://www.ontologydesignpatterns.org/oplax/> .
+
+# Module 1 - A brief description of the module.
+
+your-prefix:ExampleClass a owl:Class ;
+    rdfs:label "Example Class" ;
+    rdfs:comment "A brief description of the Example Class." ;
+    oplax:definedInModule your-prefix:Module1 .
+
+your-prefix:exampleProperty a owl:ObjectProperty ;
+    rdfs:label "example property" ;
+    rdfs:comment "A brief description of the example property." ;
+    rdfs:domain your-prefix:ExampleClass ;
+    rdfs:range your-prefix:AnotherClass ;
+    oplax:definedInModule your-prefix:Module1 .
+
+# Add more classes, properties, and individuals as needed.
+
+# Usage example: To use this module in the ontology, import this file into the main ontology file.
+
+# OPLaX annotation for the module:
+your-prefix:Module1 a oplax:Module ;
+    rdfs:label "Module 1" ;
+    rdfs:comment "A brief description of Module 1." .
