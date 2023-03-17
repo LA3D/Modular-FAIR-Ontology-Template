@@ -3,7 +3,8 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix your-prefix: <https://w3id.org/your-ontology/> .
-@prefix oplax: <http://www.ontologydesignpatterns.org/oplax/> .
+@prefix your-patterns: <https://w3id.org/your-ontology-uri/patterns/> .
+@prefix oplax: <https://w3id.org/OPLaX/> .
 
 
 # Generic pattern - this template serves as a starting point for creating your own ontology design patterns.
@@ -36,7 +37,11 @@ your-patterns:ExamplePattern rdf:type oplax:Pattern ;
     oplax:hasContext "The context or situations where the Example Pattern can be applied." ;
     oplax:hasFormalityLevel oplax:Formal ;
     oplax:hasGranularity oplax:Fine ;
-    oplax:hasPurpose "The purpose of the Example Pattern, e.g., modeling a specific domain concept." .
+    oplax:hasPurpose "The purpose of the Example Pattern, e.g., modeling a specific domain concept." ;
+    oplax:hasConceptualLevel [ rdf:type oplax:ConceptualLevel ;
+                                oplax:hasElement your-patterns:ExampleClass1,
+                                                 your-patterns:ExampleClass2,
+                                                 your-patterns:ExampleProperty1 ] .
 
 # Add instance-level OPLaX annotations for the pattern elements (e.g., classes and properties) by including oplax:implementsPattern in their definitions.
 
