@@ -1,0 +1,29 @@
+RewriteEngine on
+
+# Set the base URI for your ontology
+RewriteBase /your-ontology-base-uri/
+
+# Serve the HTML documentation by default
+RewriteCond %{HTTP_ACCEPT} !^.*text/turtle.*
+RewriteCond %{HTTP_ACCEPT} !^.*application/ld+json.*
+RewriteRule ^$ versions/latest/documentation/index.html [L]
+
+# Serve Turtle when requested
+RewriteCond %{HTTP_ACCEPT} ^.*text/turtle.*
+RewriteRule ^$ versions/latest/concatenated_ontology.ttl [L]
+
+# Serve JSON-LD when requested
+RewriteCond %{HTTP_ACCEPT} ^.*application/ld+json.*
+RewriteRule ^$ versions/latest/concatenated_ontology.jsonld [L]
+
+# Redirect to specific versions
+RewriteRule ^(1\.\d+)/$ versions/$1/documentation/index.html [L]
+RewriteCond %{HTTP_ACCEPT} ^.*text/turtle.*
+RewriteRule ^(1\.\d+)/$ versions/$1/concatenated_ontology.ttl [L]
+RewriteCond %{HTTP_ACCEPT} ^.*application/ld+json.*
+RewriteRule ^(1\.\d+)/$ versions/$1/concatenated_ontology.jsonld [L]
+
+# Serve SHACL shapes at /your-ontology-base-uri/shapes
+RewriteRule ^shapes$ shapes/shacl_shapes.ttl [L]
+RewriteCond %{HTTP_ACCEPT} ^.*application/ld+json.*
+RewriteRule ^shapes$ shapes/shacl_shapes.jsonld [L]

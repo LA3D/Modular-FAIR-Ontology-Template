@@ -1,39 +1,42 @@
 import os
 import sys
+from rdflib import Graph, RDF, OWL, RDFS, Namespace
 from pylode import OntDoc
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 VERSIONS_DIR = os.path.join(ROOT_DIR, "versions")
+CONCATENATED_ONTOLOGY_FILE = os.path.join(
+    VERSIONS_DIR, "latest", "concatenated_ontology.ttl")
+LATEST_DOCUMENTATION_DIR = os.path.join(
+    VERSIONS_DIR, "latest", "documentation")
 
 
 def main():
-    latest_version_dir = sorted(os.listdir(VERSIONS_DIR))[-1]
-    version_dirs = [latest_version_dir]
+    # Load version from concatenated_ontology.ttl
+    g = Graph()
+    g.parse(CONCATENATED_ONTOLOGY_FILE, format="turtle")
+    ontology_uri = list(g.subjects(RDF.type, OWL.Ontology))[0]
+    version = str(g.value(subject=ontology_uri, predicate=OWL.versionInfo))
 
-    for version_dir in version_dirs:
-        input_file = os.path.join(
-            VERSIONS_DIR, version_dir, "concatenated_ontology.ttl")
+    explicit_version_dir = os.path.join(VERSIONS_DIR, version)
+    os.makedirs(explicit_version_dir, exist_ok=True)
+    explicit_documentation_dir = os.path.join(
+        explicit_version_dir, "documentation")
+    os.makedirs(explicit_documentation_dir, exist_ok=True)
 
-        # Check if the input file exists
-        if not os.path.isfile(input_file):
-            print(f"Error: The input file '{input_file}' does not exist.")
-            sys.exit(1)
+    # Generate explicit version documentation
+    od = OntDoc(ontology=CONCATENATED_ONTOLOGY_FILE)
+    od.make_html(destination=os.path.join(
+        explicit_documentation_dir, "index.html"))
+    print(
+        f"Generated explicit documentation: {os.path.join(explicit_documentation_dir, 'index.html')}")
 
-        # Generate documentation for the explicit version
-        output_file_explicit = os.path.join(
-            VERSIONS_DIR, version_dir, "documentation", "index.html")
-        os.makedirs(os.path.dirname(output_file_explicit), exist_ok=True)
-        od_explicit = OntDoc(ontology=input_file)
-        od_explicit.make_html(destination=output_file_explicit)
-        print(f"Generated documentation: {output_file_explicit}")
-
-        # Generate documentation for the latest version
-        output_file_latest = os.path.join(
-            VERSIONS_DIR, "latest", "documentation", "index.html")
-        os.makedirs(os.path.dirname(output_file_latest), exist_ok=True)
-        od_latest = OntDoc(ontology=input_file)
-        od_latest.make_html(destination=output_file_latest)
-        print(f"Generated documentation: {output_file_latest}")
+    # Generate latest documentation
+    os.makedirs(LATEST_DOCUMENTATION_DIR, exist_ok=True)
+    od.make_html(destination=os.path.join(
+        LATEST_DOCUMENTATION_DIR, "index.html"))
+    print(
+        f"Generated latest documentation: {os.path.join(LATEST_DOCUMENTATION_DIR, 'index.html')}")
 
 
 if __name__ == "__main__":

@@ -1,16 +1,18 @@
-# Competency Question 1
+# Sample Competency Question 1
 #
-# Description: A brief description of the competency question.
-# Example: "Find all instances of ExampleClass with their associated properties."
-
+# Description: List all instances of ex:YourClass
+#
+# Query:
+PREFIX ex: <https://w3id.org/your-ontology-uri/1.0/schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX your-prefix: <https://w3id.org/your-ontology/>
 
-SELECT ?instance ?property ?value
+SELECT ?instance
 WHERE {
-    ?instance rdf:type your-prefix:ExampleClass .
-    ?instance ?property ?value .
+    ?instance rdf:type ex:YourClass .
 }
+#
+# Expected results (as a Python list of tuples):
+# [
+#   ("https://w3id.org/your-ontology-uri/1.0/instance1",),
+#   ("https://w3id.org/your-ontology-uri/1.0/instance2",),
+# ]
