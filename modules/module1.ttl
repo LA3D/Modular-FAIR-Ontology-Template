@@ -27,3 +27,13 @@ your-prefix:exampleProperty a owl:ObjectProperty ;
 your-prefix:Module1 a oplax:Module ;
     rdfs:label "Module 1" ;
     rdfs:comment "A brief description of Module 1." .
+
+your-prefix:YourClass a owl:Class ;
+    rdfs:label "Your Class" ;
+    rdfs:comment "A brief description of Your Class." ;
+    oplax:definedInModule your-prefix:Module1 .
+
+your-prefix:YourInstance a your-prefix:YourClass ;
+    rdfs:label "Your Instance" ;
+    rdfs:comment "A brief description of Your Instance." ;
+    oplax:definedInModule your-prefix:Module1 .

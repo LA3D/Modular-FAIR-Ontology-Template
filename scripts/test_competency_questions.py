@@ -1,5 +1,7 @@
+import re
 import os
 import sys
+import ast
 from rdflib import Graph, URIRef
 from rdflib.plugins.sparql import prepareQuery
 
@@ -9,23 +11,33 @@ CONCATENATED_ONTOLOGY_PATH = os.path.join(
     ROOT_DIR, "versions", "latest", "concatenated_ontology.ttl")
 
 
-def extract_expected_results(content):
-    start = content.find("# Expected results")
-    if start == -1:
+def extract_expected_results(content: str):
+    match = re.search(
+        r"# Expected results \(as a Python list of tuples\):\n(.*?)\n\n", content, re.DOTALL)
+    if match:
+        print("Matched content:")
+        print(match.group(1))
+
+        cleaned_content = re.sub(r'\s*#.*', '', match.group(1))
+        print("Cleaned content:")
+        print(cleaned_content)
+
+        try:
+            expected_results = ast.literal_eval(cleaned_content)
+            return expected_results
+        except SyntaxError as e:
+            print(f"Syntax error while parsing expected results: {e}")
+            return None
+    else:
+        print("No expected results found")
         return None
-
-    content = content[start:]
-    end = content.find("#")
-    if end != -1:
-        content = content[:end]
-
-    return eval(content.split(":", 1)[-1].strip())
 
 
 def main():
     # Load the concatenated ontology
     g = Graph()
     g.parse(CONCATENATED_ONTOLOGY_PATH, format="turtle")
+    print(g.serialize(format="turtle"))
 
     # Iterate through the competency questions directory and find all .rq files
     for file_name in os.listdir(COMPETENCY_QUESTIONS_DIR):
@@ -36,6 +48,10 @@ def main():
             with open(file_path, "r") as f:
                 query_content = f.read()
 
+            print(f"Processing query file: {file_name}")
+            print("Query content:")
+            print(query_content)
+
             # Extract the expected results
             expected_results = extract_expected_results(query_content)
 
@@ -45,7 +61,9 @@ def main():
             actual_results = [tuple(str(x) for x in row) for row in results]
 
             # Compare the actual results with the expected results
-            if expected_results == actual_results:
+            if expected_results is None:
+                print(f"No expected results found for {file_name}")
+            elif expected_results == actual_results:
                 print(f"Test passed for {file_name}")
             else:
                 print(f"Test failed for {file_name}")

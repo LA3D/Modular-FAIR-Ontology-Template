@@ -3,13 +3,14 @@
 # Description: List all instances of ex:YourClass
 #
 # Query:
-PREFIX ex: <https://w3id.org/your-ontology-uri/1.0/schema#>
+PREFIX your-prefix: <https://w3id.org/your-ontology/#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?instance
 WHERE {
-    ?instance rdf:type ex:YourClass .
+    ?instance rdf:type your-prefix:YourClass .
 }
+
 #
 # Expected results (as a Python list of tuples):
 # [
