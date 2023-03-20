@@ -1,0 +1,38 @@
+name: Ontology Processing
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Validate individual Turtle files (modules and patterns)
+        run: |
+          python scripts/validate_individual_files.py
+      - name: Concatenate the ontology
+        run: |
+          python scripts/concatenate_ontology.py
+      - name: Validate the concatenated ontology
+        run: |
+          python scripts/validate_individual_files.py --input_file versions/latest/concatenated_ontology.ttl
+      - name: Validate the concatenated ontology against FAIR SHACL shapes
+        run: |
+          python scripts/validate_ontology.py
+      - name: Generate documentation
+        run: |
+          python scripts/generate_documentation.py
+      - name: Generate JSON-LD
+        run: |
+          python scripts/generate_jsonld.py
+      - name: Test competency questions
+        run: |
+          python scripts/test_competency_questions.py
