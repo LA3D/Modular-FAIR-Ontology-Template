@@ -3,7 +3,7 @@
 # Description: List all instances of ex:YourClass
 #
 # Query:
-PREFIX your-prefix: <https://w3id.org/your-ontology/#>
+PREFIX your-prefix: <https://w3id.org/your-ontology-uri/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT ?instance
@@ -14,6 +14,6 @@ WHERE {
 #
 # Expected results (as a Python list of tuples):
 # [
-#   ("https://w3id.org/your-ontology-uri/1.0/instance1",),
-#   ("https://w3id.org/your-ontology-uri/1.0/instance2",),
+#   ("https://w3id.org/your-ontology-uri/YourInstance1",),
+#   ("https://w3id.org/your-ontology-uri/YourInstance2",),
 # ]

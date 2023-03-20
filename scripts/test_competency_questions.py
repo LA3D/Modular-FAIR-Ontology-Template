@@ -1,79 +1,37 @@
-import re
-import os
-import sys
-import ast
-from rdflib import Graph, URIRef
-from rdflib.plugins.sparql import prepareQuery
+import json
+import unittest
+from pathlib import Path
+from rdflib import Graph
+from rdflib.plugins.sparql.processor import prepareQuery
 
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-COMPETENCY_QUESTIONS_DIR = os.path.join(ROOT_DIR, "competency_questions")
-CONCATENATED_ONTOLOGY_PATH = os.path.join(
-    ROOT_DIR, "versions", "latest", "concatenated_ontology.ttl")
-
-
-def extract_expected_results(content: str):
-    match = re.search(
-        r"# Expected results \(as a Python list of tuples\):\n(.*?)\n\n", content, re.DOTALL)
-    if match:
-        print("Matched content:")
-        print(match.group(1))
-
-        cleaned_content = re.sub(r'\s*#.*', '', match.group(1))
-        print("Cleaned content:")
-        print(cleaned_content)
-
-        try:
-            expected_results = ast.literal_eval(cleaned_content)
-            return expected_results
-        except SyntaxError as e:
-            print(f"Syntax error while parsing expected results: {e}")
-            return None
-    else:
-        print("No expected results found")
-        return None
+ROOT_DIR = Path(__file__).resolve().parent.parent
+COMPETENCY_QUESTIONS_DIR = ROOT_DIR / "competency_questions"
+CONCATENATED_ONTOLOGY_PATH = ROOT_DIR / "versions" / \
+    "latest" / "concatenated_ontology.ttl"
 
 
-def main():
-    # Load the concatenated ontology
-    g = Graph()
-    g.parse(CONCATENATED_ONTOLOGY_PATH, format="turtle")
-    print(g.serialize(format="turtle"))
+class TestCompetencyQuestions(unittest.TestCase):
 
-    # Iterate through the competency questions directory and find all .rq files
-    for file_name in os.listdir(COMPETENCY_QUESTIONS_DIR):
-        if file_name.endswith(".rq"):
-            file_path = os.path.join(COMPETENCY_QUESTIONS_DIR, file_name)
+    @classmethod
+    def setUpClass(cls):
+        # Load concatenated ontology
+        cls.g = Graph()
+        cls.g.parse(str(CONCATENATED_ONTOLOGY_PATH), format="turtle")
 
-            # Read the SPARQL query content
-            with open(file_path, "r") as f:
-                query_content = f.read()
+    def test_competency_question(self):
+        for question_file in COMPETENCY_QUESTIONS_DIR.glob("*.jsonld"):
+            with self.subTest(question_file=question_file):
+                with open(question_file, "r") as f:
+                    question_data = json.load(f)
 
-            print(f"Processing query file: {file_name}")
-            print("Query content:")
-            print(query_content)
+                query = prepareQuery(question_data["query"])
+                results = self.g.query(query)
 
-            # Extract the expected results
-            expected_results = extract_expected_results(query_content)
+                obtained_results = [str(row[0]) for row in results]
+                expected_results = question_data["expected_output"]
 
-            # Prepare and execute the query
-            query = prepareQuery(query_content)
-            results = g.query(query)
-            actual_results = [tuple(str(x) for x in row) for row in results]
-
-            # Compare the actual results with the expected results
-            if expected_results is None:
-                print(f"No expected results found for {file_name}")
-            elif expected_results == actual_results:
-                print(f"Test passed for {file_name}")
-            else:
-                print(f"Test failed for {file_name}")
-                print("Expected results:")
-                print(expected_results)
-                print("Actual results:")
-                print(actual_results)
-
-            print("\n")
+                self.assertListEqual(obtained_results, expected_results)
 
 
 if __name__ == "__main__":
-    main()
+    unittest.main()

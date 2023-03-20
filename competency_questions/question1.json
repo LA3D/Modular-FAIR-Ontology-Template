@@ -1,0 +1,24 @@
+{
+    "@context": {
+      "@version": 1.1,
+      "id": "@id",
+      "type": "@type",
+      "version": "http://purl.org/pav/version",
+      "question": "http://www.w3.org/2004/02/skos/core#definition",
+      "query": "http://www.w3.org/2004/02/skos/core#notation",
+      "expected_output": {
+        "@container": "@list",
+        "@id": "http://schema.org/ItemList"
+      }
+    },
+    "id": "2",
+    "type": "CompetencyQuestion",
+    "version": "1.0.0",
+    "question": "List all instances of the class your-prefix:YourClass.",
+    "query": "PREFIX your-prefix: <https://w3id.org/your-ontology-uri/> SELECT ?instance WHERE { ?instance a your-prefix:YourClass . }",
+    "expected_output": [
+      "https://w3id.org/your-ontology-uri#YourInstance1",
+      "https://w3id.org/your-ontology-uri#YourInstance2"
+    ]
+  }
+  
