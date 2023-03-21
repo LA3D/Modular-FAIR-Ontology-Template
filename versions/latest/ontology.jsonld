@@ -1,0 +1,300 @@
+[
+    {
+        "@id": "https://w3id.org/your-ontology-uri",
+        "@type": [
+            "http://www.w3.org/2002/07/owl#Ontology"
+        ],
+        "http://purl.org/dc/terms/contributor": [
+            {
+                "@id": "_:n4637941ac33145af8b4b637b59b226dcb2"
+            }
+        ],
+        "http://purl.org/dc/terms/creator": [
+            {
+                "@id": "_:n4637941ac33145af8b4b637b59b226dcb1"
+            }
+        ],
+        "http://purl.org/dc/terms/description": [
+            {
+                "@value": "A short description of your ontology."
+            }
+        ],
+        "http://purl.org/dc/terms/issued": [
+            {
+                "@type": "http://www.w3.org/2001/XMLSchema#date",
+                "@value": "2023-03-17"
+            }
+        ],
+        "http://purl.org/dc/terms/license": [
+            {
+                "@id": "https://creativecommons.org/licenses/by/4.0/"
+            }
+        ],
+        "http://purl.org/dc/terms/modified": [
+            {
+                "@type": "http://www.w3.org/2001/XMLSchema#date",
+                "@value": "2023-03-17"
+            }
+        ],
+        "http://purl.org/dc/terms/publisher": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/publisher"
+            }
+        ],
+        "http://purl.org/dc/terms/title": [
+            {
+                "@value": "Your Ontology Name"
+            }
+        ],
+        "http://purl.org/vocab/vann/preferredNamespacePrefix": [
+            {
+                "@value": "your-prefix"
+            }
+        ],
+        "http://purl.org/vocab/vann/preferredNamespaceUri": [
+            {
+                "@value": "https://w3id.org/your-ontology-uri#"
+            }
+        ],
+        "http://rdfs.org/ns/void#vocabulary": [
+            {
+                "@value": "https://w3id.org/your-ontology-uri"
+            }
+        ],
+        "http://www.w3.org/2002/07/owl#imports": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/modules/common_metadata"
+            }
+        ],
+        "http://www.w3.org/2002/07/owl#versionInfo": [
+            {
+                "@value": "1.0"
+            }
+        ],
+        "http://www.w3.org/2004/02/skos/core#definition": [
+            {
+                "@value": "A detailed description of your ontology, including its purpose, scope, and intended audience."
+            }
+        ]
+    },
+    {
+        "@id": "_:n4637941ac33145af8b4b637b59b226dcb1",
+        "http://xmlns.com/foaf/0.1/mbox": [
+            {
+                "@value": "mailto:you@example.com"
+            }
+        ],
+        "http://xmlns.com/foaf/0.1/name": [
+            {
+                "@value": "Your Name"
+            }
+        ]
+    },
+    {
+        "@id": "_:n4637941ac33145af8b4b637b59b226dcb2",
+        "http://xmlns.com/foaf/0.1/mbox": [
+            {
+                "@id": "mailto:another.contributor@example.org"
+            }
+        ],
+        "http://xmlns.com/foaf/0.1/name": [
+            {
+                "@value": "Another Contributor"
+            }
+        ]
+    },
+    {
+        "@id": "https://w3id.org/your-ontology-uri/patterns/ExamplePattern",
+        "@type": [
+            "https://w3id.org/OPLaX/Pattern"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+                "@value": "A brief description of the Example Pattern."
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+                "@value": "Example Pattern"
+            }
+        ],
+        "https://w3id.org/OPLaX/hasConceptualLevel": [
+            {
+                "@id": "_:nb0d0ae216b574d1fb0e474891ca8ad1bb1"
+            }
+        ],
+        "https://w3id.org/OPLaX/hasContext": [
+            {
+                "@value": "The context or situations where the Example Pattern can be applied."
+            }
+        ],
+        "https://w3id.org/OPLaX/hasFormalityLevel": [
+            {
+                "@id": "https://w3id.org/OPLaX/Formal"
+            }
+        ],
+        "https://w3id.org/OPLaX/hasGranularity": [
+            {
+                "@id": "https://w3id.org/OPLaX/Fine"
+            }
+        ],
+        "https://w3id.org/OPLaX/hasIntent": [
+            {
+                "@value": "The intent or purpose of the Example Pattern."
+            }
+        ],
+        "https://w3id.org/OPLaX/hasPurpose": [
+            {
+                "@value": "The purpose of the Example Pattern, e.g., modeling a specific domain concept."
+            }
+        ]
+    },
+    {
+        "@id": "_:nb0d0ae216b574d1fb0e474891ca8ad1bb1",
+        "@type": [
+            "https://w3id.org/OPLaX/ConceptualLevel"
+        ],
+        "https://w3id.org/OPLaX/hasElement": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/patterns/ExampleClass1"
+            },
+            {
+                "@id": "https://w3id.org/your-ontology-uri/patterns/ExampleClass2"
+            },
+            {
+                "@id": "https://w3id.org/your-ontology-uri/patterns/ExampleProperty1"
+            }
+        ]
+    },
+    {
+        "@id": "https://w3id.org/your-ontology-uri/Module1",
+        "@type": [
+            "http://www.ontologydesignpatterns.org/oplax/Module"
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+                "@value": "A brief description of Module 1."
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+                "@value": "Module 1"
+            }
+        ]
+    },
+    {
+        "@id": "https://w3id.org/your-ontology-uri/ExampleClass",
+        "@type": [
+            "http://www.w3.org/2002/07/owl#Class"
+        ],
+        "http://www.ontologydesignpatterns.org/oplax/definedInModule": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/Module1"
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+                "@value": "A brief description of the Example Class."
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+                "@value": "Example Class"
+            }
+        ]
+    },
+    {
+        "@id": "https://w3id.org/your-ontology-uri/YourClass",
+        "@type": [
+            "http://www.w3.org/2002/07/owl#Class"
+        ],
+        "http://www.ontologydesignpatterns.org/oplax/definedInModule": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/Module1"
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+                "@value": "A brief description of Your Class."
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+                "@value": "Your Class"
+            }
+        ]
+    },
+    {
+        "@id": "https://w3id.org/your-ontology-uri/exampleProperty",
+        "@type": [
+            "http://www.w3.org/2002/07/owl#ObjectProperty"
+        ],
+        "http://www.ontologydesignpatterns.org/oplax/definedInModule": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/Module1"
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+                "@value": "A brief description of the example property."
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#domain": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/ExampleClass"
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+                "@value": "example property"
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#range": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/AnotherClass"
+            }
+        ]
+    },
+    {
+        "@id": "https://w3id.org/your-ontology-uri/YourInstance2",
+        "@type": [
+            "https://w3id.org/your-ontology-uri/YourClass"
+        ],
+        "http://www.ontologydesignpatterns.org/oplax/definedInModule": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/Module1"
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+                "@value": "A brief description of Your second module Instance."
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+                "@value": "Your Instance2"
+            }
+        ]
+    },
+    {
+        "@id": "https://w3id.org/your-ontology-uri/YourInstance1",
+        "@type": [
+            "https://w3id.org/your-ontology-uri/YourClass"
+        ],
+        "http://www.ontologydesignpatterns.org/oplax/definedInModule": [
+            {
+                "@id": "https://w3id.org/your-ontology-uri/Module1"
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#comment": [
+            {
+                "@value": "A brief description of Your first module Instance."
+            }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+            {
+                "@value": "Your Instance1"
+            }
+        ]
+    }
+]
