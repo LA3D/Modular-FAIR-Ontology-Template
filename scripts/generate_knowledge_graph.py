@@ -1,48 +1,20 @@
 import os
 import rdflib
-from rdflib import Graph, URIRef, Namespace
+from rdflib.namespace import RDF, OWL, RDFS, Namespace
 from rdflib.plugins.sparql import prepareQuery
-from rdflib.plugins.stores.sparqlstore import SPARQLStore
+from rdflib.plugins.sparql.processor import SPARQLResult
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def load_ontology_and_instances():
-    """
-    Loads the concatenated ontology and example instance data into an RDFLib graph.
-
-    Returns:
-        A Graph object containing the concatenated ontology and instance data.
-    """
-    # Define the input file paths
-    ontology_path = os.path.join(
-        ROOT_DIR, "versions", "latest", "concatenated_ontology.ttl")
-    instances_path = os.path.join(
-        ROOT_DIR, "instances", "example_instance.ttl")
-
-    # Create an RDFLib graph and load the concatenated ontology and instance data
-    graph = Graph()
-    graph.parse(ontology_path, format="turtle")
-    graph.parse(instances_path, format="turtle")
-
-    return graph
-
-
 def apply_reasoning(graph):
     """
-    Applies OWLRL reasoning to the RDFLib graph.
-
-    Args:
-        graph: A Graph object containing the concatenated ontology and instance data.
-
-    Returns:
-        A Graph object containing the inferred knowledge graph after reasoning has been applied.
+    Apply OWL reasoning to the input graph and return a new graph
     """
-    # Create a new RDFLib graph and load the concatenated ontology and instance data
-    new_graph = Graph()
-    new_graph.parse(data=graph.serialize(format='turtle'), format='turtle')
+    new_graph = rdflib.Graph()
+    new_graph += graph  # Create a new graph with the original data
 
-    # Apply OWLRL reasoning to the graph
+    # Use the OWL RL semantics to apply RDFS and OWL reasoning
     owlrl.DeductiveClosure(owlrl.OWLRL_Semantics).expand(new_graph)
 
     return new_graph
@@ -50,55 +22,54 @@ def apply_reasoning(graph):
 
 def serialize_knowledge_graph(graph, output_file):
     """
-    Serializes the knowledge graph to the output file in Turtle format.
-
-    Args:
-        graph: A Graph object containing the inferred knowledge graph after reasoning has been applied.
-        output_file: The path to the output file for the serialized knowledge graph.
+    Serialize the RDFLib Graph object to a file
     """
-    # Create a new RDFLib graph to hold the post-reasoning statements
-    new_graph = Graph()
+    ns = Namespace('https://w3id.org/your-ontology-uri#')
 
-    # Define the namespaces for the output graph
-    ns = Namespace('https://w3id.org/your-ontology-uri/')
-    ns.bind('your-prefix', ns)
+    # Bind the namespace to the prefix
+    graph.bind('your-prefix', ns)
 
-    # Define the SPARQL query to retrieve the relevant statements from the post-reasoning graph
-    query = prepareQuery(
-        """
-        SELECT ?s ?p ?o WHERE {
-            ?s ?p ?o .
-            FILTER(isURI(?s) && isURI(?o))
-        }
-        """,
-        initNs={"ns": ns}
-    )
-
-    # Execute the SPARQL query on the post-reasoning graph and add the results to the new graph
-    for row in graph.query(query):
-        new_graph.add((row[0], row[1], row[2]))
-
-    # Serialize the new graph to the output file in Turtle format
-    with open(output_file, "w") as f:
-        f.write(new_graph.serialize(format="turtle").decode())
+    # Serialize the graph to the output file
+    with open(output_file, 'w') as f:
+        f.write(graph.serialize(format='turtle'))
 
     print(f"Knowledge graph saved to: {output_file}")
 
 
 def main():
-    # Define the input and output file paths
-    output_file = os.path.join(
-        ROOT_DIR, "knowledge_graphs", "sample_knowledge_graph.ttl")
+    # Define input directories and output file
+    modules_dir = os.path.join(ROOT_DIR, 'modules')
+    patterns_dir = os.path.join(ROOT_DIR, 'patterns')
+    instances_dir = os.path.join(ROOT_DIR, 'instances')
+    kg_dir = os.path.join(ROOT_DIR, 'knowledge_graphs')
+    output_file = os.path.join(kg_dir, 'sample_knowledge_graph.ttl')
 
-    # Load the concatenated ontology and instance data
-    graph = load_ontology_and_instances()
+    # Create the RDFLib Graph
+    graph = rdflib.Graph()
 
-    # Apply OWLRL reasoning to the graph
+    # Load ontology modules
+    for file_name in os.listdir(modules_dir):
+        file_path = os.path.join(modules_dir, file_name)
+        graph.parse(file_path, format='turtle')
+
+    # Load ontology patterns
+    for file_name in os.listdir(patterns_dir):
+        file_path = os.path.join(patterns_dir, file_name)
+        graph.parse(file_path, format='turtle')
+
+    # Load instance data
+    for file_name in os.listdir(instances_dir):
+        file_path = os.path.join(instances_dir, file_name)
+        graph.parse(file_path, format='turtle')
+
+    # Apply reasoning
     graph = apply_reasoning(graph)
 
-    # Serialize the inferred knowledge graph to the output file
+    # Serialize the knowledge graph
     serialize_knowledge_graph(graph, output_file)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+    # Import owlrl after __name__ check to avoid NameError
+    import owlrl
     main()

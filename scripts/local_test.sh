@@ -25,4 +25,7 @@ echo "Step 6: Generate JSON-LD"
 echo "Step 7: Test competency questions"
 "$VENV_PYTHON" "$SCRIPT_DIR/test_competency_questions.py"
 
+echo "Step 8: Generate the knowledge graph"
+"$VENV_PYTHON" "$SCRIPT_DIR/generate_knowledge_graph.py"
+
 echo "Completed local test"
