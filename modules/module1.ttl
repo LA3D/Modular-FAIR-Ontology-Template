@@ -32,13 +32,3 @@ your-prefix:YourClass a owl:Class ;
     rdfs:label "Your Class" ;
     rdfs:comment "A brief description of Your Class." ;
     oplax:definedInModule your-prefix:Module1 .
-
-your-prefix:YourInstance1 a your-prefix:YourClass ;
-    rdfs:label "Your Instance1" ;
-    rdfs:comment "A brief description of Your first module Instance." ;
-    oplax:definedInModule your-prefix:Module1 .
-
-your-prefix:YourInstance2 a your-prefix:YourClass ;
-    rdfs:label "Your Instance2" ;
-    rdfs:comment "A brief description of Your second module Instance." ;
-    oplax:definedInModule your-prefix:Module1 .

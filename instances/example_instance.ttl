@@ -1,0 +1,13 @@
+@prefix your-prefix: <https://w3id.org/your-ontology-uri/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+
+your-prefix:YourInstance1 a your-prefix:YourClass ;
+    rdfs:label "Your Instance1" ;
+    rdfs:comment "A brief description of Your first module Instance." ;
+    oplax:definedInModule your-prefix:Module1 .
+
+your-prefix:YourInstance2 a your-prefix:YourClass ;
+    rdfs:label "Your Instance2" ;
+    rdfs:comment "A brief description of Your second module Instance." ;
+    oplax:definedInModule your-prefix:Module1 .
